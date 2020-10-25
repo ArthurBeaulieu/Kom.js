@@ -10,7 +10,7 @@
   ],
   "main": "Kom.js",
   "scripts": {
-    "build": "webpack --env version=0.0.1 --progress",
+    "build": "webpack --env version=0.0.1 --env dev=false --progress",
     "dev": "webpack --env version=0.0.1 --env dev=true --progress",
     "web-server": "http-server -p 1337 -c-1 -o example.html",
     "doc": "jsdoc -c doc/jsDoc.json",
@@ -42,7 +42,7 @@
     "karma-firefox-launcher": ">=1.1.0",
     "karma-jasmine": ">=1.1.2",
     "karma-sourcemap-loader": ">=0.3.7",
-    "karma-webpack": "^4.0.0",
+    "karma-webpack": "^5.0.0-alpha.3.0",
     "tui-jsdoc-template": ">=1.2.2",
     "webpack": ">=4.16.5",
     "webpack-cli": ">=3.1.0"

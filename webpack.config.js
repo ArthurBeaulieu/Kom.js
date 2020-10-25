@@ -2,12 +2,13 @@ module.exports = env => {
   // Webpack clean and uglify plugins
   const path = require('path');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+  const TerserPlugin = require('terser-webpack-plugin');
   // Utils path
   const SRC = path.resolve(__dirname, '');
   const DIST = path.resolve(__dirname, 'dist');
   // Webpack configuration object
   return {
-    mode: env.dev === 'true' ? 'development' : 'production',
+    mode: 'development',
     watch: env.dev === 'true',
     entry: ['src/Kom.js'],
     stats: {
@@ -18,8 +19,8 @@ module.exports = env => {
       path: DIST,
       filename: `Kom.min.js`
     },
-    module: { // Only transpile code in production mode
-      rules: env.dev === 'true' ? [] : [{
+    module: {
+      rules: [{
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
@@ -29,6 +30,17 @@ module.exports = env => {
           }
         }
       }]
+    },
+    optimization: {
+      minimize: env.dev === 'false',
+      minimizer: [ new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+         output: {
+           comments: false,
+         },
+       }
+     }) ],
     },
     plugins: [
       new CleanWebpackPlugin({
