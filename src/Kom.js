@@ -1,6 +1,3 @@
-'use strict';
-
-
 const HttpStatusCode = Object.freeze({
   OK: 200, // The HTTP call worked properly
   NOT_FOUND: 404, // The url wasn't found
