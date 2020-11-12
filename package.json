@@ -1,6 +1,6 @@
 {
   "name": "kom.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A basic module to perform server calls. KISS, light and library free.",
   "keywords": [
     "javascript",

@@ -1,6 +1,6 @@
 # Kom.js
 
-![](https://badgen.net/badge/version/0.0.1/blue)
+![](https://badgen.net/badge/version/0.1.0/blue)
 [![License](https://img.shields.io/github/license/ArthurBeaulieu/Kom.js.svg)](https://github.com/ArthurBeaulieu/Kom.js/blob/master/LICENSE.md)
 ![](https://badgen.net/badge/documentation/written/green)
 ![](https://badgen.net/badge/test/todo/red)
