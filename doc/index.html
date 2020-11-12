@@ -34,7 +34,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.checkValidity">checkValidity</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li></ul></div></li></ul></div>
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._checkValidity">_checkValidity</a></li><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAs">_resolveAs</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li><li><a href="Kom.html#.postRaw">postRaw</a></li><li><a href="Kom.html#.postText">postText</a></li></ul></div></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -57,7 +57,86 @@
 
 
     <section>
-        <article class="readme"><h1>Kom.js</h1></article>
+        <article class="readme"><h1>Kom.js</h1>
+<p><img src="https://badgen.net/badge/version/0.0.1/blue" alt="">
+<a href="https://github.com/ArthurBeaulieu/Kom.js/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ArthurBeaulieu/Kom.js.svg" alt="License"></a>
+<img src="https://badgen.net/badge/documentation/written/green" alt="">
+<img src="https://badgen.net/badge/test/todo/red" alt="">
+<img src="https://badgen.net/badge/dependencies/none/green" alt=""></p>
+<p><code>Kom.js</code> is a JavaScript ES6 component that provides an abstraction to perform HTTP server calls (<code>GET</code> and <code>POST</code>). The caller can format the server response to be a JavaScript object, a string or raw binary data.</p>
+<p>With ~2Ko minified, <code>Kom.js</code> is designed to be stable and remain as light as possible. It is meant to be used application wide so you can perform HTTP calls from anywhere in your app.</p>
+<h1>Get Started</h1>
+<p>This repository was made to store documentation, test bench and source code. If you want to include this component in your project, you either need the <code>src/Kom.js</code> file if you have an assets bundler in your project, or use the <code>dist/Kom.bundle.js</code> to use the minified component. This minified file is compiled in ES5 JavaScript for compatibility reasons. The unminified file is, in the contrary, bundled in ES6 JavaScript.</p>
+<p>Here's an example on how to create a <code>Kom.js</code> component :</p>
+<pre class="prettyprint source lang-javascript"><code>/* Import the Js component */
+import _Kom from './src/Kom.js';
+/* Create a server call abstraction */
+const Kom = new _Kom();
+</code></pre>
+<p>Now that Kom.js is instantiated, you can perform server calls using the following methods ;</p>
+<h4>HTTP <code>GET</code> with a JavaScript object response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.get('url/to/get').then(response => {
+  // response is formatted as a JavaScript object
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<h4>HTTP <code>GET</code> with a string response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.getText('url/to/get').then(response => {
+  // response is formatted as string
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<h4>HTTP <code>GET</code> with a raw binary data response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.getRaw('url/to/get').then(response => {
+  // response is formatted as raw binary data
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<h4>HTTP <code>POST</code> with a JavaScript object response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.post('url/to/post', {
+  data: 'MyData',
+  ...
+}).then(response => {
+  // response is formatted as a JavaScript object
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<h4>HTTP <code>POST</code> with a string response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.postText('url/to/post', {
+  data: 'MyData',
+  ...
+}).then(response => {
+  // response is formatted as string
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<h4>HTTP <code>POST</code> with a raw binary data response</h4>
+<pre class="prettyprint source lang-javascript"><code>Kom.postRaw('url/to/post', {
+  data: 'MyData',
+  ...
+}).then(response => {
+  // response is formatted as raw binary data
+}).catch(error => {
+  // HTTP call encountered an unexpected return value
+});
+</code></pre>
+<p>You're now good to go! If however you need more information, you can read the online <a href="https://arthurbeaulieu.github.io/Kom.js/doc/">documentation</a>.</p>
+<h1>Development</h1>
+<p>If you clone this repository, you can <code>npm install</code> to install development dependencies. This will allow you to build dist file, run the component tests or generate the documentation ;</p>
+<ul>
+<li><code>npm run build</code> to generate the minified file in es5 Js ;</li>
+<li><code>npm run watch</code> to generate an es6 bundle and watch for changes ;</li>
+<li><code>npm run web-server</code> to launch a local development server ;</li>
+<li><code>npm run doc</code> to generate documentation ;</li>
+<li><code>npm run beforecommit</code> to perform tests, generate doc and bundle the JavaScript.</li>
+</ul>
+<p>To avoid CORS when locally loading the example HTML file, run the web server. Please do not use it on a production environment. Unit tests are performed on both Firefox and Chrome ; ensure you have both installed before running tests, otherwise they might fail.</p>
+<p>If you have any question or idea, feel free to DM or open an issue (or even a PR, who knows) ! I'll be glad to answer your request.</p></article>
     </section>
 
 

@@ -36,7 +36,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.checkValidity">checkValidity</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li></ul></div></li></ul></div>
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._checkValidity">_checkValidity</a></li><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAs">_resolveAs</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li><li><a href="Kom.html#.postRaw">postRaw</a></li><li><a href="Kom.html#.postText">postText</a></li></ul></div></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -74,6 +74,8 @@ class Kom {
     /** @private
      * @member {array[]} - Array of HTTP headers to be used in HTTP calls */
     this._headers = this._createRequestHeaders();
+    // Check that CSRF token exists and that headers are properly created
+    this._checkValidity();
   }
 
 
@@ -122,6 +124,23 @@ class Kom {
   }
 
 
+  /** @method
+   * @async
+   * @name _checkValidity
+   * @private
+   * @memberof Kom
+   * @description &lt;blockquote>Check the Kom instance validity to ensure its properties validity.&lt;/blockquote> */
+  _checkValidity() {
+    if (this._csrfToken !== '') {
+      if (this._headers.length !== 3) {
+        console.error('F_KOM_HEADERS_ERROR');
+      }
+    } else {
+      console.error('F_KOM_NO_CSRF_TOKEN');
+    }
+  }
+
+
   /*  --------------------------------------------------------------------------------------------------------------- */
   /*  -------------------------------------------  PRIVATE METHODS  ------------------------------------------------  */
   /*  --------------------------------------------------------------------------------------------------------------- */
@@ -144,8 +163,43 @@ class Kom {
     } else if (code === HttpStatusCode.INTERNAL_ERROR) {
       return 'B_KOM_INTERNAL_ERROR';
     } else {
-      return `B_KOM_UNKNOWN_ERROR`;
+      return `B_KOM_UNKNOWN_ERROR_${code}`;
     }
+  }
+
+
+  /** @method
+   * @async
+   * @name _resolveAs
+   * @private
+   * @memberof Kom
+   * @description &lt;blockquote>Generic tool method used by private methods on fetch responses to format output in the provided
+   * format. It must be either `json`, `text` or `raw`.&lt;/blockquote>
+   * @param {String} type - The type of resolution, can be `json`, `text` or `raw`
+   * @param {Object} response - The &lt;code>fetch&lt;/code> response object
+   * @returns {Promise} The request &lt;code>Promise&lt;/code>, format response as an object on resolve, as error code string on reject */
+  _resolveAs(type, response) {
+    return new Promise((resolve, reject) => {
+      if (response) {
+        if (type === 'raw') { // Raw are made in XMLHttpRequest and need special handling
+          if (response.status === HttpStatusCode.OK) {
+            resolve(response.responseText);
+          } else {
+            reject(this._getErrorCodeFromHTTPStatus(response.status));
+          }
+        } else if (type === 'json' || type === 'text') { // Call are made using fetch API
+          if (response.ok) {
+            resolve(response[type]());
+          } else {
+            reject(this._getErrorCodeFromHTTPStatus(response.status));
+          }
+        } else { // Resolution type doesn't exists
+          reject('F_KOM_UNSUPPORTED_TYPE');
+        }
+      } else {
+        reject('F_KOM_MISSING_ARGUMENT');
+      }
+    });
   }
 
 
@@ -159,17 +213,7 @@ class Kom {
    * @param {Object} response - The &lt;code>fetch&lt;/code> response object
    * @returns {Promise} The request &lt;code>Promise&lt;/code>, format response as an object on resolve, as error code string on reject */
   _resolveAsJSON(response) {
-    return new Promise((resolve, reject) => {
-      if (response) {
-        if (response.ok) {
-          resolve(response.json());
-        } else {
-          reject(this._getErrorCodeFromHTTPStatus(response.status));
-        }
-      } else {
-        reject('F_KOM_MISSING_ARGUMENT');
-      }
-    });
+    return this._resolveAs('json', response);
   }
 
 
@@ -183,17 +227,7 @@ class Kom {
    * @param {Object} response - The &lt;code>fetch&lt;/code> response object
    * @returns {Promise} The request &lt;code>Promise&lt;/code>, format response as a string on resolve, as error code string on reject */
   _resolveAsText(response) {
-    return new Promise((resolve, reject) => {
-      if (response) {
-        if (response.ok) {
-          resolve(response.text());
-        } else {
-          reject(this._getErrorCodeFromHTTPStatus(response.status));
-        }
-      } else {
-        reject('F_KOM_MISSING_ARGUMENT');
-      }
-    });
+    return this._resolveAs('text', response);
   }
 
 
@@ -206,41 +240,7 @@ class Kom {
    * @param {Object} response - The &lt;code>XmlHTTPRequest&lt;/code> response status object
    * @returns {Promise} The request &lt;code>Promise&lt;/code>, doesn't format response on resolve, send error code string on reject */
   _resolveAsRaw(response) {
-    return new Promise((resolve, reject) => {
-      if (response) {
-        if (response.status === HttpStatusCode.OK) {
-          resolve(response.responseText);
-        } else {
-          reject(this._getErrorCodeFromHTTPStatus(response.status));
-        }
-      } else {
-        reject('F_KOM_MISSING_ARGUMENT');
-      }
-    });
-  }
-
-
-  /*  --------------------------------------------------------------------------------------------------------------- */
-  /*  --------------------------------------------  PUBLIC METHODS  ------------------------------------------------  */
-  /*  --------------------------------------------------------------------------------------------------------------- */
-
-
-  /** @method
-   * @async
-   * @name checkValidity
-   * @public
-   * @memberof Kom
-   * @description &lt;blockquote>Check the Kom instance validity to ensure its properties validity. Useful to call after
-   * component instantiation to ensure all its headers are properly set.&lt;/blockquote>
-   * @returns {Promise} The validity &lt;code>Promise&lt;/code>, rejected if csrf token not set, resolved otherwise  */
-  checkValidity() {
-    return new Promise((resolve, reject) => {
-      if (this._csrfToken !== '' &amp;&amp; this._headers.length !== null) {
-        resolve();
-      } else {
-        reject('F_KOM_INIT_FAILED');
-      }
-    });
+    return this._resolveAs('raw', response);
   }
 
 
@@ -259,7 +259,7 @@ class Kom {
    * It is meant to perform API call to access database through the user interface.&lt;/blockquote>
    * @param {String} url - The &lt;code>GET&lt;/code> url to fetch data from, in supported back URLs
    * @returns {Promise} The request &lt;code>Promise&lt;/code> */
-  get(url) {
+  get(url, resolution = this._resolveAsJSON.bind(this)) {
     return new Promise((resolve, reject) => {
       const options = {
         method: 'GET',
@@ -267,7 +267,7 @@ class Kom {
       };
 
       fetch(url, options)
-        .then(this._resolveAsJSON)
+        .then(resolution)
         .then(resolve)
         .catch(reject);
     });
@@ -285,17 +285,7 @@ class Kom {
    * @param {String} url - The &lt;code>GET&lt;/code> url to fetch data from, in supported back URLs
    * @returns {Promise} The request &lt;code>Promise&lt;/code> */
   getText(url) {
-    return new Promise((resolve, reject) => {
-      const options = {
-        method: 'GET',
-        headers: new Headers([this._headers[0]]) // Content type to JSON
-      };
-
-      fetch(url, options)
-        .then(this._resolveAsText.bind(this))
-        .then(resolve)
-        .catch(reject);
-    });
+    return this.get(url, this._resolveAsText.bind(this));
   }
 
 
@@ -314,14 +304,16 @@ class Kom {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.overrideMimeType('text/plain; charset=x-user-defined');
-      xhr.onreadystatechange = response => { // Keep old js function definition since this is the request response object
+      xhr.onreadystatechange = response => {
         if (response.target.readyState === 4) { // Ready state changed has reach the response state
           this._resolveAsRaw(response.target)
             .then(resolve)
             .catch(reject);
         }
       };
-      xhr.onerror = reject('F_KOM_XHR_ERROR');
+      xhr.onerror = () => {
+        reject('F_KOM_XHR_ERROR')
+      };
       xhr.send();
     });
   }
@@ -338,7 +330,7 @@ class Kom {
    * @param {String} url - The &lt;code>POST&lt;/code> url to fetch data from
    * @param {Object} data - The &lt;code>JSON&lt;/code> object that contains &lt;code>POST&lt;/code> parameters
    * @returns {Promise} The request &lt;code>Promise&lt;/code> */
-  post(url, data) {
+  post(url, data, resolution = this._resolveAsJSON.bind(this)) {
     return new Promise((resolve, reject) => {
       const options = {
         method: 'POST',
@@ -347,9 +339,58 @@ class Kom {
       };
 
       fetch(url, options)
-        .then(this._resolveAsJSON)
+        .then(resolution)
         .then(resolve)
         .catch(reject);
+    });
+  }
+
+
+  /** @method
+   * @async
+   * @name postText
+   * @public
+   * @memberof Kom
+   * @description &lt;blockquote>&lt;code>POST&lt;/code> HTTP request using the fetch API.&lt;br>Beware that the given options
+   * object match the url expectations.&lt;br>&lt;code>resolve&lt;/code>
+   * returns the response as a &lt;code>String&lt;/code>.&lt;br>&lt;code>reject&lt;/code> returns an error key as a &lt;code>String&lt;/code>.&lt;/blockquote>
+   * @param {String} url - The &lt;code>POST&lt;/code> url to fetch data from
+   * @param {Object} data - The &lt;code>JSON&lt;/code> object that contains &lt;code>POST&lt;/code> parameters
+   * @returns {Promise} The request &lt;code>Promise&lt;/code> */
+  postText(url, data) {
+    return this.post(url, data, this._resolveAsText.bind(this));
+  }
+
+
+  /** @method
+   * @async
+   * @name postRaw
+   * @public
+   * @memberof Kom
+   * @description &lt;blockquote>&lt;code>POST&lt;/code> HTTP request using the fetch API.&lt;br>Beware that the given options
+   * object match the url expectations.&lt;br>&lt;code>resolve&lt;/code>, with an override
+   * mime type hack to pass bytes through unprocessed.&lt;br>&lt;code>resolve&lt;/code> returns the response as raw binary data.&lt;br>&lt;code>reject&lt;/code>
+   * returns an error code as a &lt;code>String&lt;/code>.&lt;/blockquote>
+   * @param {String} url - The url to fetch raw data from
+   * @param {Object} data - The &lt;code>JSON&lt;/code> object that contains &lt;code>POST&lt;/code> parameters
+   * @returns {Promise} The request &lt;code>Promise&lt;/code> */
+  postRaw(url, data) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('X-CSRFToken', this._csrfToken);
+      xhr.overrideMimeType('text/plain; charset=x-user-defined');
+      xhr.onreadystatechange = response => {
+        if (response.target.readyState === 4) { // Ready state changed has reach the response state
+          this._resolveAsRaw(response.target)
+            .then(resolve)
+            .catch(reject);
+        }
+      };
+      xhr.onerror = () => {
+        reject('F_KOM_XHR_ERROR')
+      };
+      xhr.send(JSON.stringify(data));
     });
   }
 

@@ -13,7 +13,8 @@
     "build": "webpack --config webpack/webpack.prod.js ",
     "watch": "webpack --watch --config webpack/webpack.dev.js",
     "web-server": "http-server -p 1337 -c-1 -o example.html",
-    "doc": "jsdoc -c doc/jsDoc.json"
+    "doc": "jsdoc -c doc/jsDoc.json",
+    "beforecommit": "npm run doc && npm run build"
   },
   "homepage": "https://github.com/ArthurBeaulieu/Kom.js",
   "repository": {

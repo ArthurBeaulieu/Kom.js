@@ -34,7 +34,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.checkValidity">checkValidity</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li></ul></div></li></ul></div>
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Kom.html">Kom</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Kom_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Kom.html#_csrfToken">_csrfToken</a></li><li><a href="Kom.html#_headers">_headers</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Kom.html#._checkValidity">_checkValidity</a></li><li><a href="Kom.html#._createRequestHeaders">_createRequestHeaders</a></li><li><a href="Kom.html#._getCsrfCookie">_getCsrfCookie</a></li><li><a href="Kom.html#._getErrorCodeFromHTTPStatus">_getErrorCodeFromHTTPStatus</a></li><li><a href="Kom.html#._resolveAs">_resolveAs</a></li><li><a href="Kom.html#._resolveAsJSON">_resolveAsJSON</a></li><li><a href="Kom.html#._resolveAsRaw">_resolveAsRaw</a></li><li><a href="Kom.html#._resolveAsText">_resolveAsText</a></li><li><a href="Kom.html#.get">get</a></li><li><a href="Kom.html#.getRaw">getRaw</a></li><li><a href="Kom.html#.getText">getText</a></li><li><a href="Kom.html#.post">post</a></li><li><a href="Kom.html#.postRaw">postRaw</a></li><li><a href="Kom.html#.postText">postText</a></li></ul></div></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -349,6 +349,95 @@ the session must contain a csrf token in cookies. Otherwise, those <code>POST</c
 
 <dt>
     
+        <h4 class="name" id="._checkValidity">
+            
+                <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">private</span>, <span class="icon green">static</span> </span>_checkValidity<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Kom.js.html">Kom.js</a></code>,
+                <code><a href="Kom.js.html#line77">line 77</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>Check the Kom instance validity to ensure its properties validity.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
         <h4 class="name" id="._createRequestHeaders">
             
                 <span class="type-signature"><span class="icon green">private</span>, <span class="icon green">static</span> </span>_createRequestHeaders<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;array>}</span>
@@ -356,7 +445,7 @@ the session must contain a csrf token in cookies. Otherwise, those <code>POST</c
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line59">line 59</a></code>
+                <code><a href="Kom.js.html#line61">line 61</a></code>
             </div>
             
         </h4>
@@ -469,7 +558,7 @@ This method is required to be called on construction.</blockquote>
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line35">line 35</a></code>
+                <code><a href="Kom.js.html#line37">line 37</a></code>
             </div>
             
         </h4>
@@ -582,7 +671,7 @@ string by default. This method is required to be called on construction.</blockq
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line80">line 80</a></code>
+                <code><a href="Kom.js.html#line99">line 99</a></code>
             </div>
             
         </h4>
@@ -737,6 +826,190 @@ in the user interface (with notification, console or else).</blockquote>
 
 <dt>
     
+        <h4 class="name" id="._resolveAs">
+            
+                <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">private</span>, <span class="icon green">static</span> </span>_resolveAs<span class="signature">(type, response)</span><span class="type-signature"> &rarr; {Promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Kom.js.html">Kom.js</a></code>,
+                <code><a href="Kom.js.html#line121">line 121</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>Generic tool method used by private methods on fetch responses to format output in the provided
+format. It must be either `json`, `text` or `raw`.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type of resolution, can be <code>json</code>, <code>text</code> or <code>raw</code></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>fetch</code> response object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Promise</span>
+
+
+
+
+
+- <p>The request <code>Promise</code>, format response as an object on resolve, as error code string on reject</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
         <h4 class="name" id="._resolveAsJSON">
             
                 <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">private</span>, <span class="icon green">static</span> </span>_resolveAsJSON<span class="signature">(response)</span><span class="type-signature"> &rarr; {Promise}</span>
@@ -744,7 +1017,7 @@ in the user interface (with notification, console or else).</blockquote>
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line102">line 102</a></code>
+                <code><a href="Kom.js.html#line156">line 156</a></code>
             </div>
             
         </h4>
@@ -905,7 +1178,7 @@ read in JavaScript code as objects.</blockquote>
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line150">line 150</a></code>
+                <code><a href="Kom.js.html#line184">line 184</a></code>
             </div>
             
         </h4>
@@ -1065,7 +1338,7 @@ read in JavaScript code as objects.</blockquote>
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line126">line 126</a></code>
+                <code><a href="Kom.js.html#line170">line 170</a></code>
             </div>
             
         </h4>
@@ -1165,117 +1438,6 @@ read in JavaScript code as string (mostly to parse HTML templates).</blockquote>
 
 
 - <p>The request <code>Promise</code>, format response as a string on resolve, as error code string on reject</p>
-
-
-
-
-            
-    </div>
-    
-
-    
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-</dd>
-
-            
-                
-
-<dt>
-    
-        <h4 class="name" id=".checkValidity">
-            
-                <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">static</span> </span>checkValidity<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span>
-                
-            
-            <div class="container-source members">
-                <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line178">line 178</a></code>
-            </div>
-            
-        </h4>
-
-        
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <blockquote>Check the Kom instance validity to ensure its properties validity. Useful to call after
-component instantiation to ensure all its headers are properly set.</blockquote>
-    </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <div class="container-returns">
-        <h5>Returns:</h5>
-        
-                
-
-
-
-<span class="param-type">Promise</span>
-
-
-
-
-
-- <p>The validity <code>Promise</code>, rejected if csrf token not set, resolved otherwise</p>
 
 
 
@@ -1499,7 +1661,7 @@ It is meant to perform API call to access database through the user interface.</
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line252">line 252</a></code>
+                <code><a href="Kom.js.html#line242">line 242</a></code>
             </div>
             
         </h4>
@@ -1823,7 +1985,7 @@ meant to perform API call to get HTML templates as string to be parsed as docume
             
             <div class="container-source members">
                 <code><a href="Kom.js.html">Kom.js</a></code>,
-                <code><a href="Kom.js.html#line280">line 280</a></code>
+                <code><a href="Kom.js.html#line272">line 272</a></code>
             </div>
             
         </h4>
@@ -1838,6 +2000,377 @@ meant to perform API call to get HTML templates as string to be parsed as docume
         <blockquote><code>POST</code> HTTP request using the fetch API.<br>Beware that the given options
 object match the url expectations.<br><code>resolve</code>
 returns the response as an <code>Object</code>.<br><code>reject</code> returns an error key as a <code>String</code>.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>POST</code> url to fetch data from</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>JSON</code> object that contains <code>POST</code> parameters</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Promise</span>
+
+
+
+
+
+- <p>The request <code>Promise</code></p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".postRaw">
+            
+                <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">static</span> </span>postRaw<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Kom.js.html">Kom.js</a></code>,
+                <code><a href="Kom.js.html#line315">line 315</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote><code>POST</code> HTTP request using the fetch API.<br>Beware that the given options
+object match the url expectations.<br><code>resolve</code>, with an override
+mime type hack to pass bytes through unprocessed.<br><code>resolve</code> returns the response as raw binary data.<br><code>reject</code>
+returns an error code as a <code>String</code>.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The url to fetch raw data from</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>JSON</code> object that contains <code>POST</code> parameters</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Promise</span>
+
+
+
+
+
+- <p>The request <code>Promise</code></p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".postText">
+            
+                <span class="type-signature"><span class="icon green">async</span>, <span class="icon green">static</span> </span>postText<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Kom.js.html">Kom.js</a></code>,
+                <code><a href="Kom.js.html#line299">line 299</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote><code>POST</code> HTTP request using the fetch API.<br>Beware that the given options
+object match the url expectations.<br><code>resolve</code>
+returns the response as a <code>String</code>.<br><code>reject</code> returns an error key as a <code>String</code>.</blockquote>
     </div>
     
 
